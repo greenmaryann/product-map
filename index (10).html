@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%3Cpath%20d%3D%22M45.5986%203.5498C47.2448%201.9251%2051.9504%204.02357%2056.1094%208.2373C60.2684%2012.4511%2062.3053%2017.1848%2060.6592%2018.8096C59.8236%2019.6338%2058.2008%2019.4975%2056.2608%2018.6143C60.2926%2024.4164%2061.7407%2029.8315%2059.4424%2032.1006C57.6519%2033.8678%2053.9834%2033.335%2049.7315%2031.0732C58.3808%2042.5359%2061.8673%2053.4488%2057.5264%2057.7334C53.1202%2062.0823%2041.9911%2058.2782%2030.459%2049.1904C33.1321%2053.9066%2033.8478%2058.0387%2031.9151%2059.9463C29.6582%2062.1729%2024.4187%2060.7488%2018.7891%2056.8105C19.345%2058.4034%2019.329%2059.7054%2018.6104%2060.415C16.9642%2062.0398%2012.2577%2059.9414%208.09865%2055.7275C3.93974%2051.5137%201.90272%2046.78%203.54885%2045.1553C4.27734%2044.4364%205.60544%2044.4469%207.21974%2045.0469C3.42673%2039.4185%202.11219%2034.2269%204.3506%2032.0176C6.25468%2030.1383%2010.2824%2030.8587%2014.877%2033.4951C5.70741%2021.6955%201.90942%2010.3011%206.36818%205.90039C10.6944%201.63105%2021.5001%205.22068%2032.8057%2013.9531C30.5746%209.64756%2030.0785%205.94694%2031.877%204.17187C34.2212%201.8587%2039.7849%203.48438%2045.6602%207.77637C44.8713%205.90241%2044.7882%204.34974%2045.5986%203.5498Z%22%20fill%3D%22%231F1F1F%22/%3E%0A%3C/svg%3E">
+<title>Product Map</title>
+<style>
+  :root{
+    --dark:#1F1F1F;--mid:#5E5E5E;--gray:#8C8C8C;--light:#B3B3B3;
+    --bg:#FAFAFA;--white:#FFFFFF;--border:#E4E4E4;--grayL:#F1F1F1;--grayLL:#F7F7F7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--dark);padding:48px 56px;font-size:14px;-webkit-font-smoothing:antialiased;}
+  @media(max-width:820px){body{padding:28px 20px;}}
+
+  /* HEADER */
+  .header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-bottom:28px;border-bottom:1px solid var(--border);margin-bottom:34px;flex-wrap:wrap;}
+  .header h1{font-size:26px;font-weight:600;letter-spacing:-0.5px;}
+  .header .sub{color:var(--gray);font-size:13px;margin-top:6px;}
+  .header-right{text-align:right;}
+  .counter-pill{display:inline-block;border:1px solid var(--border);background:var(--white);border-radius:100px;padding:7px 16px;font-size:12px;color:var(--mid);}
+  .counter-pill strong{color:var(--dark);}
+
+  .intro{color:var(--mid);font-size:13px;line-height:1.65;max-width:700px;margin-bottom:40px;}
+
+  /* MAP */
+  .map{display:flex;flex-direction:column;gap:0;max-width:760px;margin:0 auto;}
+
+  .zone{position:relative;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:24px 26px;}
+  .zone-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;}
+  .zone-num{width:26px;height:26px;border-radius:50%;background:var(--dark);color:var(--white);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;}
+  .zone-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;}
+  .zone-role{color:var(--gray);font-size:12px;margin-left:auto;text-align:right;max-width:280px;}
+  .zone-desc{color:var(--mid);font-size:12.5px;line-height:1.55;margin:8px 0 18px 38px;max-width:620px;}
+
+  .features{display:flex;flex-wrap:wrap;gap:9px;margin-left:38px;}
+  .feat{display:inline-flex;align-items:center;gap:7px;background:var(--grayLL);border:1px solid var(--border);border-radius:100px;padding:8px 15px;font-size:12.5px;font-weight:500;color:var(--dark);}
+  .feat .dot{width:5px;height:5px;border-radius:50%;background:var(--light);flex:none;}
+  .feat.hero{background:var(--dark);color:var(--white);border-color:var(--dark);}
+  .feat.hero .dot{background:var(--white);}
+
+  .nested{display:flex;align-items:center;gap:10px;margin:12px 0 0 38px;padding:10px 14px;background:var(--grayLL);border:1px solid var(--border);border-radius:12px;flex-wrap:wrap;}
+  .nested-label{font-size:12px;font-weight:600;color:var(--dark);display:flex;align-items:center;gap:7px;}
+  .nested-label::before{content:"⌸";display:none;}
+  .nested-label::after{content:"›";color:var(--light);font-weight:700;margin-left:2px;}
+  .nested-chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .subfeat{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--border);border-radius:100px;padding:6px 13px;font-size:12px;color:var(--mid);}
+
+  /* CONNECTOR */
+  .connector{display:flex;flex-direction:column;align-items:center;height:52px;position:relative;}
+  .connector .line{width:2px;flex:1;background:var(--mid);}
+  .connector .arrow{position:absolute;bottom:2px;width:11px;height:11px;border-right:2px solid var(--mid);border-bottom:2px solid var(--mid);transform:rotate(45deg);}
+  .connector.branch{height:52px;}
+  .connector-label{position:absolute;left:calc(50% + 18px);top:50%;transform:translateY(-50%);font-size:10.5px;color:var(--gray);white-space:nowrap;background:var(--bg);padding:2px 6px;}
+
+  /* SPINE — the always-present core loop */
+  .spine-note{margin:2px 0 2px 38px;font-size:11px;color:var(--light);font-style:italic;}
+
+  /* CROSS-CUTTING */
+  .crosscut{margin-top:44px;padding-top:30px;border-top:1px solid var(--border);max-width:760px;margin-left:auto;margin-right:auto;}
+  .crosscut h2{font-size:14px;font-weight:600;margin-bottom:6px;}
+  .crosscut p{color:var(--mid);font-size:12.5px;line-height:1.55;max-width:640px;margin-bottom:18px;}
+  .crosscut .features{margin-left:0;}
+  .crosscut .feat{background:var(--white);}
+
+  /* LEGEND */
+  .legend{display:flex;gap:22px;flex-wrap:wrap;margin:34px auto 0;max-width:760px;padding:14px 20px;background:var(--white);border:1px solid var(--border);border-radius:12px;font-size:11.5px;color:var(--mid);}
+  .legend-item{display:flex;align-items:center;gap:8px;}
+  .lg-hero{width:12px;height:12px;border-radius:50%;background:var(--dark);}
+  .lg-feat{width:12px;height:12px;border-radius:50%;background:var(--grayL);border:1px solid var(--border);}
+
+  footer{margin-top:36px;color:var(--light);font-size:11px;}
+
+  @media(max-width:820px){
+    .zone-role{margin-left:0;text-align:left;max-width:none;width:100%;}
+    .zone-head{flex-wrap:wrap;}
+    .zone-desc,.features,.spine-note{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Product Map</h1>
+    <p class="sub">Mujer Financiera · vista de punta a punta</p>
+  </div>
+  <div class="header-right">
+    <span class="counter-pill">La visión completa</span>
+  </div>
+</div>
+
+<p class="intro">El producto entero de una mirada — todas las zonas y todo lo que vive en cada una, sin distinción de qué se construye primero. Pensado para tener la foto del alcance, no el detalle de cada pantalla (eso vive en los flujos). El recorrido central es un loop: se registra, se ve el balance, se entiende, se ajusta, y se vuelve a registrar. Todo lo demás cuelga de ese eje.</p>
+
+<div class="map">
+
+  <!-- 1 ENTRADA -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">1</span>
+      <span class="zone-title">Entrada</span>
+      <span class="zone-role">La primera vez — y cómo se vuelve a entrar cada día</span>
+    </div>
+    <p class="zone-desc">Onboarding que además del setup funcional valida cómo se siente la usuaria con su plata. Después, el acceso rápido de todos los días.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>On Boarding</span>
+      <span class="feat"><span class="dot"></span>Login social</span>
+      <span class="feat"><span class="dot"></span>Setup — tope, moneda, intención</span>
+      <span class="feat"><span class="dot"></span>Biometría / bloqueo</span>
+    </div>
+  </div>
+
+  <div class="connector"><div class="line"></div><div class="arrow"></div></div>
+
+  <!-- 2 CUENTAS -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">2</span>
+      <span class="zone-title">Cuentas</span>
+      <span class="zone-role">La infraestructura — sobre qué se registra todo</span>
+    </div>
+    <p class="zone-desc">Se definen una vez, durante o después del onboarding, y sostienen todo lo demás: cada gasto que se registra pertenece a una cuenta. Distintas monedas conviven como cuentas distintas. Es lo que tiene que existir antes de empezar a cargar movimientos.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>Main account</span>
+      <span class="feat"><span class="dot"></span>Ahorro</span>
+      <span class="feat"><span class="dot"></span>TDC + Cuotas</span>
+      <span class="feat"><span class="dot"></span>Multi-currency</span>
+    </div>
+  </div>
+
+  <div class="connector"><div class="line"></div><div class="arrow"></div></div>
+
+  <!-- 3 REGISTRO -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">3</span>
+      <span class="zone-title">Registro</span>
+      <span class="zone-role">El ritual diario — el corazón del producto</span>
+    </div>
+    <p class="zone-desc">Capturar un gasto en segundos, del modo que a cada una le salga natural. Es lo que se hace más veces y por donde entra todo el dato.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>Registro por texto</span>
+      <span class="feat"><span class="dot"></span>Audio</span>
+      <span class="feat"><span class="dot"></span>Imágenes / ticket</span>
+      <span class="feat"><span class="dot"></span>WhatsApp Bot</span>
+      <span class="feat"><span class="dot"></span>Widgets</span>
+      <span class="feat"><span class="dot"></span>Import PDF / extracto</span>
+      <span class="feat"><span class="dot"></span>Split the bill</span>
+      <span class="feat"><span class="dot"></span>Automations</span>
+      <span class="feat"><span class="dot"></span>Gastos recurrentes</span>
+      <span class="feat"><span class="dot"></span>Bank Connection</span>
+    </div>
+  </div>
+
+  <div class="connector"><div class="line"></div><div class="arrow"></div></div>
+
+  <!-- 4 CATEGORIZACIÓN -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">4</span>
+      <span class="zone-title">Categorización</span>
+      <span class="zone-role">Ordenar el dato — dónde se le pone regla al gasto</span>
+    </div>
+    <p class="zone-desc">Cada gasto registrado se clasifica y, si querés, se le pone un tope. Es la capa que convierte movimientos sueltos en información con la que después se puede presupuestar y analizar.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>Categorías inteligentes</span>
+      <span class="feat"><span class="dot"></span>Subcategorías</span>
+      <span class="feat"><span class="dot"></span>Límites por categoría</span>
+    </div>
+  </div>
+
+  <div class="connector"><div class="line"></div><div class="arrow"></div></div>
+
+  <!-- 5 HOME / BALANCE -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">5</span>
+      <span class="zone-title">Home & Balance</span>
+      <span class="zone-role">El centro de mando — dónde estoy parada hoy</span>
+    </div>
+    <p class="zone-desc">El estado de la plata de un vistazo: balance, movimientos recientes, y los accesos a todo lo demás. El punto al que se vuelve después de cada acción.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>Balance</span>
+      <span class="feat"><span class="dot"></span>Listado de movimientos</span>
+      <span class="feat"><span class="dot"></span>Detalle / editar registro</span>
+      <span class="feat"><span class="dot"></span>Detalle / editar categoría</span>
+      <span class="feat"><span class="dot"></span>Buscador</span>
+      <span class="feat"><span class="dot"></span>Calendario</span>
+    </div>
+  </div>
+
+  <div class="connector"><div class="line"></div><div class="arrow"></div><span class="connector-label">se bifurca en dos caminos →</span></div>
+
+  <!-- 6 PRESUPUESTO -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">6</span>
+      <span class="zone-title">Presupuesto</span>
+      <span class="zone-role">Poner reglas — el ADN educativo de MF</span>
+    </div>
+    <p class="zone-desc">Convertir la intención en un plan. Los límites por categoría ya nacen en la capa anterior; acá se arma el presupuesto con nombre propio y se sigue su progreso.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>Presupuesto con nombre</span>
+      <span class="feat"><span class="dot"></span>Smart Budget (IA)</span>
+      <span class="feat"><span class="dot"></span>Seguimiento y progreso</span>
+      <span class="feat"><span class="dot"></span>Alertas de límite</span>
+      <span class="feat"><span class="dot"></span>Cuentas compartidas</span>
+    </div>
+  </div>
+
+  <div class="connector"><div class="line"></div><div class="arrow"></div></div>
+
+  <!-- 7 INTELLIGENCE -->
+  <div class="zone">
+    <div class="zone-head">
+      <span class="zone-num">7</span>
+      <span class="zone-title">Intelligence</span>
+      <span class="zone-role">Entender — lo que aparece con datos</span>
+    </div>
+    <p class="zone-desc">Lo que se desbloquea a medida que hay historial: primero insights simples, después reportes, comparativas y proyecciones. Cierra el loop devolviendo sentido a lo registrado.</p>
+    <div class="features">
+      <span class="feat"><span class="dot"></span>Insights contextuales</span>
+      <span class="feat"><span class="dot"></span>Reglas 50/30/20 · 80/20</span>
+      <span class="feat"><span class="dot"></span>Comparativas de gastos</span>
+      <span class="feat"><span class="dot"></span>Charts de evolución</span>
+      <span class="feat"><span class="dot"></span>Resumen mensual</span>
+      <span class="feat"><span class="dot"></span>Proyecciones de ahorro</span>
+      <span class="feat"><span class="dot"></span>Consultorio / AIssistant</span>
+      <span class="feat"><span class="dot"></span>Export CSV / PDF / Notion</span>
+    </div>
+    <p class="spine-note">↩ el loop se reinicia: los insights invitan a seguir registrando</p>
+  </div>
+
+</div>
+
+<!-- CROSS-CUTTING -->
+<div class="crosscut">
+  <h2>Transversal</h2>
+  <p>No vive en una zona del recorrido — cruza todo el producto. Es el vínculo con el ecosistema de MF, la capa educativa que da contexto a lo que la usuaria hace en cada pantalla.</p>
+  <div class="features">
+    <span class="feat"><span class="dot"></span>Ecosistema educativo (Circle)</span>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-item" style="color:var(--mid)">Cada zona es un paso del recorrido. El orden dentro de cada una sugiere la secuencia, pero el uso real no es lineal.</span>
+</div>
+
+<footer>Mary Ann Villalobos + Enoc Montiel · Mujer Financiera</footer>
+
+</body>
+</html>
